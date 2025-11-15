@@ -10,5 +10,12 @@ def generate_profile(age):
 user_name = input("Enter your name:")
 birth_year_str = input("Enter your birth year:")
 birth_year = int(birth_year_str)
-print(type(birth_year))
+current_age = 2025 - birth_year
+hobbies = []
+while True:
+    hobby = input("Enter а favorite hobby ог type 'stop' to finish: ")
+    if hobby.strip().lower() == "stop":
+        break
+    hobbies.append(hobby)
+print(hobbies)
 generate_profile(5)
