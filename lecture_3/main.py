@@ -126,6 +126,32 @@ def main():
 
         print(report_text)
 
+    def get_top_performer(students: list):
+        if not students:
+            print("The list of students is empty.")
+            return
+
+        # Filter students who have grades
+        students_with_grades = []
+        for student in students:
+            name = list(student.keys())[0]
+            grades = list(student.values())[0]
+            if grades:  # Only include students with at least one grade
+                students_with_grades.append((name, grades))
+
+        if not students_with_grades:
+            print("No students have grades yet.")
+            return
+
+        # Use max() with a lambda function to find the student with highest average
+        top_student_info = max(students_with_grades,
+                               key=lambda student_data: sum(student_data[1]) / len(student_data[1]))
+
+        name, grades = top_student_info
+        avg_grade = sum(grades) / len(grades)
+        print(
+            f"The student with the highest average is {name} with a grade of {round(avg_grade, 1)}")
+
     while True:
         try:
             # Display menu options
