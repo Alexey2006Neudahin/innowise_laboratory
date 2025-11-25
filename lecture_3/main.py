@@ -3,7 +3,15 @@ def main():
     students = []
 
     def new_student(students: list):
-        """Add a new student to the system with validation"""
+        """
+    Adds a new student to the system with comprehensive validation.
+
+    Validation Rules:
+    - Names cannot be empty
+    - No numeric characters allowed
+    - No punctuation or special characters
+    - Case-insensitive duplicate detection
+    """
         while True:
             raw_name = input("Enter student's name: ").strip()
             try:
@@ -38,6 +46,21 @@ def main():
                 print(f'Error: {e}')
 
     def add_grade(students: list):
+        """
+    Manages grade input for existing students with robust validation.
+
+    Features:
+    - Student existence verification
+    - Grade range validation (0-100)
+    - Numeric input enforcement
+    - Batch grade entry with 'done' command
+    - Real-time grade confirmation
+
+    Validation Includes:
+    - Integer conversion checks
+    - Range boundary enforcement
+    - Non-numeric input rejection
+    """
         while True:
             raw_name = input("Enter student's name: ").strip()
             try:
@@ -91,6 +114,20 @@ def main():
                 print(f'Error: {e}')
 
     def show_report(students: list):
+        """
+    Generates comprehensive academic performance reports.
+
+    Output Includes:
+    - Individual student averages
+    - Class statistics (max, min, overall average)
+    - Proper handling of students without grades
+    - Formatted, readable output structure
+
+    Statistical Calculations:
+    - Rounded averages to 1 decimal place
+    - Automatic N/A placement for missing data
+    - Multi-level error handling for calculation issues
+    """
         if not students:
             print("The list of students is empty.")
             return
@@ -127,6 +164,20 @@ def main():
         print(report_text)
 
     def get_top_performer(students: list):
+        """
+    Identifies the highest-performing student using advanced algorithms.
+
+    Technical Implementation:
+    - Uses max() with lambda function for efficient calculation
+    - Implements walrus operator for concise grade extraction
+    - Handles edge cases (empty lists, no grades)
+    - Provides clear, informative output
+
+    Algorithm Features:
+    - Single-pass evaluation of all students
+    - Automatic filtering of students without grades
+    - Efficient average calculation using built-in functions
+    """
         if not students:
             print("The list of students is empty.")
             return
