@@ -9,17 +9,17 @@ def main():
             try:
                 # Validation: Check for empty input
                 if not raw_name:
-                    raise ValueError('Name cannot be empty.')
+                    raise ValueError('Name cannot be empty.\n')
 
                 # Validation: Check if name contains any digits
                 if any(char.isdigit() for char in raw_name):
-                    raise ValueError('The name must not contain numbers')
+                    raise ValueError('The name must not contain numbers\n')
 
                 # Validation: Check for punctuation and special characters
                 forbidden_chars = set('!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~')
                 if any(char in forbidden_chars for char in raw_name):
                     raise ValueError(
-                        ' The name must not contain punctuation marks or special characters')
+                        ' The name must not contain punctuation marks or special characters\n')
 
                 # Normalize the name: Capitalize first letter of each word
                 name = ''.join(word.capitalize() for word in raw_name.split())
@@ -27,11 +27,11 @@ def main():
                 for student in students:
                     if name in student:
                         print(
-                            f"Name '{name}' already exists. Choose another name.")
+                            f"Name '{name}' already exists. Choose another name.\n")
                         break
                 else:
                     students.append({name: []})
-                    print(f'{name} has been added.')
+                    print(f'{name} has been added.\n')
                     break
 
             except ValueError as e:
@@ -43,17 +43,17 @@ def main():
             try:
                 # Validation: Check for empty input
                 if not raw_name:
-                    raise ValueError('Name cannot be empty.')
+                    raise ValueError('Name cannot be empty.\n')
 
                 # Validation: Check if name contains any digits
                 if any(char.isdigit() for char in raw_name):
-                    raise ValueError('The name must not contain numbers')
+                    raise ValueError('The name must not contain numbers\n')
 
                 # Validation: Check for punctuation and special characters
                 forbidden_chars = set('!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~')
                 if any(char in forbidden_chars for char in raw_name):
                     raise ValueError(
-                        ' The name must not contain punctuation marks or special characters')
+                        ' The name must not contain punctuation marks or special characters\n')
 
                 # Normalize the name: Capitalize first letter of each word
                 name = ''.join(word.capitalize() for word in raw_name.split())
@@ -90,6 +90,42 @@ def main():
             except ValueError as e:
                 print(f'Error: {e}')
 
+    def show_report(students: list):
+        if not students:
+            print("The list of students is empty.")
+            return
+
+        report_text = "--- Student Report ---\n"
+        averages = []
+
+        for student in students:
+            for name, grades in student.items():
+                try:
+                    average_value = round(sum(grades) / len(grades), 1)
+                    averages.append(average_value)
+                except ZeroDivisionError:
+                    average_value = "N/A"
+
+                report_text += f"{name}'s average grade is {average_value}\n"
+
+        report_text += "-" * 10
+
+        if not averages:
+            print("Students haven't grades")
+            return
+
+        max_avg = max(averages)
+        min_avg = min(averages)
+        overall_avg = round(sum(averages) / len(averages), 1)
+
+        report_text += (
+            f"\nMax average: {max_avg}"
+            f"\nMin average: {min_avg}"
+            f"\nOverall average: {overall_avg}"
+        )
+
+        print(report_text)
+
     while True:
         try:
             # Display menu options
@@ -105,6 +141,13 @@ def main():
                 new_student(students)
             elif choice == 2:
                 add_grade(students)
+            elif choice == 3:
+                show_report(students)
+            elif choice == 4:
+                get_top_performer(students)
+            elif choice == 5:
+                print('Exiting program...')
+                break
 
         except Exception as e:
             print(f'ошибка {e}')
